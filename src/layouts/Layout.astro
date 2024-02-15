@@ -1,0 +1,50 @@
+---
+import '../styles/global.css';
+
+import Head from '../components/Head.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+	title: string;
+	description?: string;
+	image?: string;
+}
+
+const { 
+  title, 
+  description = 'Blog sobre tecnologias, desenvolvimento web e banckend.',
+  image = '/images/og.png'
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="pt-br">
+	<head>
+		<Head {title} {description} {image}/>
+	</head>
+	<body>
+		<header>
+			<Navigation />
+		</header>
+		<main>
+			<slot />
+		</main>
+	</body>
+</html>
+
+<style>
+	header {
+		max-width: calc(var(--header-width) + var(--default-gap) * 2);
+	}
+
+	main {
+		margin-bottom: 3rem;
+		max-width: calc(var(--main-width) + var(--default-gap) * 2);
+	}
+
+	header,
+	main {
+		margin-inline: auto;
+	}
+</style>

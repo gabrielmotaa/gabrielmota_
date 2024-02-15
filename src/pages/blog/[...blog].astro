@@ -1,0 +1,52 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const postsEntries = await getCollection('posts');
+  return postsEntries.map(entry => ({
+      params: { blog: entry.slug }, props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const dateFormatter = Intl.DateTimeFormat('pt-br', { dateStyle: 'long' });
+const image = `/images/${entry.data?.image?.src ?? 'og.png'}`;
+---
+<Layout title=`${entry.data.title} | gabrielmota_` description={entry.data.description} image={image}>
+  <section>
+    <article>
+      <h1>{entry.data.title}</h1>
+      <time datetime={entry.data.pubDate.toString().slice(0, 10)}>{dateFormatter.format(entry.data.pubDate)}</time>
+      {entry.data.image && <img src={`/images/${entry.data.image.src}`} alt={entry.data.image.alt}>}
+      <div id="prose">
+        <Content />
+      </div>
+    </article>
+  </section>
+</Layout>
+
+<style>
+  section {
+    background-color: var(--color-text-bg);
+    border-radius: 8px;
+    padding: var(--default-gap);
+  }
+  time {
+    display: block;
+    margin-bottom: .8rem;
+    opacity: 0.6;
+  }
+
+  img {
+    max-height: 400px;
+  }
+
+  .description {
+    border-radius: 8px;
+    padding: var(--default-gap);
+    background-color: var(--color-primary-5);
+  }
+  
+</style>

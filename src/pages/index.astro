@@ -1,0 +1,50 @@
+---
+import Hero from '@components/Hero.astro';
+import PostList from '@components/PostList.astro';
+import Layout from '@layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const postsEntries = await getCollection('posts');
+---
+
+<Layout title="gabrielmota_">
+	<section>
+		<Hero />
+	</section>
+	<section>
+		<h2>Posts recentes</h2>
+		<PostList posts={postsEntries.slice(0, 3)}/>
+		<nav>
+			<a href="/blog">
+				Veja todos os posts
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right">
+					<path d="M5 12h14"></path>
+					<path d="m12 5 7 7-7 7"></path>
+				</svg>
+			</a>
+		</nav>
+	</section>
+</Layout>
+
+<style>
+	nav {
+		margin-top: 1.5rem;
+		text-align: right;
+	}
+
+	a {
+		color: var(--color-text);
+		text-decoration: none;
+		display: inline-flex;
+		gap: .5rem;
+		align-items: center;
+		padding: calc(var(--default-gap) / 2) var(--default-gap);
+		background-color: var(--color-primary-5);
+		border-radius: 8px;
+	}
+
+	a:hover {
+    color: var(--color-text);
+		background-color: var(--color-primary-10);
+	}
+</style>

@@ -1,0 +1,39 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const postEntries = await getCollection('posts');
+const tags = [...new Set(postEntries.map((post) => post.data.tags).flat())];
+---
+
+<Layout title="Tags | gabrielmota_">
+  <section>
+    <h1>Tags</h1>
+    <div>
+      {tags.map((tag) => <a href=`/tags/${tag}`>{tag}</a>)}
+    </div>
+  </section>
+</Layout>
+
+<style>
+div {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--default-gap);
+}
+
+a {
+  color: var(--color-text);
+  text-decoration: none;
+  padding: calc(var(--default-gap) / 2) var(--default-gap);
+  background-color: var(--color-primary-5);
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+a:hover {
+  background-color: var(--color-primary-10);
+  color: var(--color-primary);
+}
+</style>

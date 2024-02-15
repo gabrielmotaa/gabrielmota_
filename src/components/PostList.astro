@@ -1,0 +1,25 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Post from "./Post.astro";
+
+interface Props {
+  posts: CollectionEntry<'posts'>[];
+  title?: string;
+}
+
+const { posts, title } = Astro.props;
+---
+
+{title && <h1>{title}</h1>}
+
+<div>
+  {posts.map((post) => <Post {post} />)}
+</div>
+
+<style>
+  div {
+    margin-top: 1.5rem;
+    display: grid;
+    gap: 1.5rem;
+  }
+</style>

@@ -1,0 +1,169 @@
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-sans: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
+  --font-mono: JetBrains Mono, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+
+  --font-size-sm: clamp(0.8rem, 0.17vw + 0.76rem, 0.89rem);
+  --font-size-base: clamp(1rem, 0.34vw + 0.91rem, 1.19rem);
+  --font-size-base: 18px;
+  --font-size-md: clamp(1.25rem, 0.61vw + 1.1rem, 1.58rem);
+  --font-size-lg: clamp(1.56rem, 1vw + 1.31rem, 2.11rem);
+  --font-size-xl: clamp(1.95rem, 1.56vw + 1.56rem, 2.81rem);
+
+  
+  --color-primary-5: hsl(204, 100%, 50%, 5%);
+  --color-primary-10: hsl(204, 100%, 50%, 10%);
+
+
+  --color-text: #0e0f10;
+  --color-bg: #ffffff;
+  --color-primary: #0099ff;
+  --color-secondary: #8cbcdd;
+  --color-accent: #56aae2;
+  --color-text-bg: hsl(206, 23%, 97%);
+
+  --header-width: 64rem;
+  --main-width: 45rem;
+  --default-gap: 1.5rem;
+}
+
+@media screen and (max-width: 40rem) {
+  :root {
+    --default-gap: .75rem;
+  }
+}
+
+*, *::before, **::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-sans);
+}
+
+html.dark {
+  --color-text: #eff0f1;
+  --color-bg: #0c1013;
+  --color-primary: #0099ff;
+  --color-secondary: #265d81;
+  --color-accent: #4997ca;
+  --color-text-bg: hsl(206, 21%, 10%);
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  font-size: var(--font-size-base);
+}
+
+body ::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+}
+
+body ::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, .5);
+  -webkit-transition: color .2s ease;
+  transition: color .2s ease;
+}
+
+body ::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, .1);
+  border-radius: 0;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: .95rem;
+}
+
+a {
+  color: var(--color-accent);
+}
+
+a:hover {
+  color: var(--color-secondary);
+}
+
+h1 {
+  font-size: var(--font-size-xl);
+  margin: 0;
+}
+
+h2 {
+  font-size: var(--font-size-lg);
+  margin: 0;
+}
+
+h3 {
+  font-size: var(--font-size-md);
+  margin: 0;
+}
+
+section {
+  margin-top: 3rem;
+  padding: 0 var(--default-gap);
+}
+
+img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+pre {
+  padding: .5rem;
+  overflow: auto;
+  border-radius: 8px;
+}
+
+code {
+  padding: .25rem;
+  border-radius: 8px;
+  direction: ltr;
+}
+
+pre > code {
+  border-radius: 8px;
+  display: block;
+  line-height: 1.6;
+  word-break: normal;
+  white-space: pre;
+  word-spacing: normal;
+  tab-size: 4;
+}
+
+p code {
+  background-color: var(--color-primary-10);
+}
+
+blockquote {
+  margin: 1.2rem 0;
+  padding: calc(var(--default-gap) / 2) var(--default-gap);
+  border-left: 4px solid var(--color-accent);
+  background-color: var(--color-primary-5);
+}
+
+html.dark #prose p,
+html.dark #prose li {
+  opacity: .9;
+}
+

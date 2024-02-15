@@ -1,0 +1,36 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const postEntries = await getCollection('posts');
+  const uniqueTags = [...new Set(postEntries.map((post) => post.data.tags).flat())];
+  return uniqueTags.map((tag) => {
+    const filteredPosts = postEntries.filter((post) => post.data.tags.includes(tag));
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    }
+  })
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+const formatter = Intl.DateTimeFormat('pt-br', { dateStyle: 'long' });
+---
+
+<Layout title=`Tag ${tag} | gabrielmota_`>
+  <section>
+  <h1>Tag: {tag}</h1>
+  <div>
+  <ul>
+    {posts.map((post) => <li><a href={`/blog/${post.slug}`}>{post.data.title}</a> - {formatter.format(post.data.pubDate)}</li>)}
+  </ul></div></section>
+</Layout>
+
+<style>
+div {
+  margin-top: 1.5rem;
+}
+</style>
+

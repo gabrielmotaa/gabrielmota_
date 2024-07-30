@@ -3,7 +3,9 @@ import PostList from '@components/PostList.astro';
 import Layout from '@layouts/Layout.astro';
 import { getCollection } from "astro:content";
 
-const postsEntries = await getCollection('posts');
+const postsEntries = (await getCollection('posts')).sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+);
 ---
 
 <Layout title="Blog | gabrielmota_">
